@@ -84,7 +84,7 @@
         };
 
         const onClick = (d) => {
-          window.location = d.path
+          window.location = `{{ site.baseurl }}${d.path}`
         };
 
         const onMouseover = function (d) {

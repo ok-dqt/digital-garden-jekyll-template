@@ -1,16 +1,13 @@
-title: My digital garden
-source: blog
-destination: _site
-include: ['_pages', '_posts', '_notes']
-exclude: ['_scripts']
-
+title:               My digital garden
+include:             ['_pages', '_posts', '_notes']
+exclude:             ['_scripts']
 # You may need to change the base URL depending on your deploy configuration.
 url: "http://localhost:4000"
 baseurl: "" # the subpath of your site, e.g. /blog
 
 # If you are using a host that cannot resolve URLs that do
 # not end with .html (such as Neocities), set this to 'true'.
-use_html_extension: false
+use_html_extension:  false
 
 # Set to `true` to open non-internal links in new tabs, or
 # set to `false` to open non-internal links in current tab.
@@ -21,14 +18,14 @@ open_external_links_in_new_tab: true
 # as their browser will communicate with Twitter's servers.
 embed_tweets: false
 
-permalink: pretty
+permalink:           pretty
 relative_permalinks: false
 
 plugins: []
 
 sass:
-  sass_dir: blog/_sass
-  style: :compressed
+  sass_dir:          _sass
+  style:            :compressed
 
 collections:
   notes:

@@ -4,16 +4,21 @@ class BidirectionalLinksGenerator < Jekyll::Generator
     graph_nodes = []
     graph_edges = []
 
-    all_notes = site.collections['notes'].docs
+    puts "[DEBUG] Starting BidirectionalLinksGenerator"
+
+
+    all_notes = site.collections['notes'].docs.filter { |note| note.data['publish'] == true }
+    all_posts = site.collections['posts'].docs.filter { |post| post.data['publish'] }
     all_pages = site.pages
 
-    all_docs = all_notes + all_pages
+    all_docs = all_notes + all_pages + all_posts
 
     link_extension = !!site.config["use_html_extension"] ? '.html' : ''
 
     # Convert all Wiki/Roam-style double-bracket link syntax to plain HTML
     # anchor tag elements (<a>) with "internal-link" CSS class
     all_docs.each do |current_note|
+      puts "[DEBUG] Processing: #{current_note.path}"
       all_docs.each do |note_potentially_linked_to|
         note_title_regexp_pattern = Regexp.escape(
           File.basename(
@@ -76,7 +81,7 @@ class BidirectionalLinksGenerator < Jekyll::Generator
     # Identify note backlinks and add them to each note
     all_notes.each do |current_note|
       # Nodes: Jekyll
-      notes_linking_to_current_note = all_notes.filter do |e|
+      notes_linking_to_current_note = all_docs.filter do |e|
         e.url != current_note.url && e.content.include?(current_note.url)
       end
 
@@ -88,7 +93,13 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       } unless current_note.path.include?('_notes/index.html')
 
       # Edges: Jekyll
-      current_note.data['backlinks'] = notes_linking_to_current_note
+      current_note.data['backlinks'] = notes_linking_to_current_note.map do |n|
+        {
+          'url' => n.url,
+          'title' => n.data['title'] || n.data['slug'],
+          'excerpt' => n.content.strip.split(/\n\n/).first
+        }
+      end
 
       # Edges: Graph
       notes_linking_to_current_note.each do |n|
@@ -99,13 +110,19 @@ class BidirectionalLinksGenerator < Jekyll::Generator
       end
     end
 
-    File.write('_includes/notes_graph.json', JSON.dump({
+    puts "[DEBUG] all_notes count: #{all_notes.count}"
+    puts "[DEBUG] all_posts count: #{all_posts.count}"
+    puts "[DEBUG] all_pages count: #{all_pages.count}"
+    puts "[DEBUG] Writing notes_graph.json with #{graph_nodes.count} nodes and #{graph_edges.count} edges"
+    File.write('blog/_includes/notes_graph.json', JSON.dump({
       edges: graph_edges,
       nodes: graph_nodes,
     }))
   end
 
   def note_id_from_note(note)
-    note.data['title'].bytes.join
+    title = note.data['title']
+    return File.basename(note.basename, File.extname(note.basename)) if title.nil?
+    title.bytes.join
   end
 end

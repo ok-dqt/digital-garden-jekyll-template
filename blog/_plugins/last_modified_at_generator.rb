@@ -10,7 +10,8 @@ module Recents
     def generate(site)
       items = site.collections['notes'].docs
       items.each do |page|
-        timestamp = Jekyll::LastModifiedAt::Determinator.new(site.source, page.path, '%FT%T%:z').to_s
+        relative_path = Pathname.new(page.path).relative_path_from(Pathname.new(site.source)).to_s
+        timestamp = Jekyll::LastModifiedAt::Determinator.new(site.source, relative_path, '%FT%T%:z').to_s
         page.data['last_modified_at_timestamp'] = timestamp
       end
     end

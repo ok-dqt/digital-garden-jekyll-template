@@ -1,5 +1,6 @@
 ---
 title: A note about cats
+publish: true
 ---
 
 This is a second note with a poem with cats. 

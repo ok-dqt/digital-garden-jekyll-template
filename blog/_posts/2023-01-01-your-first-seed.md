@@ -1,5 +1,8 @@
 ---
+date: '2023-01-01'
+publish: true
 title: Your first seed
+layout: post
 ---
 
 ### Welcome!
@@ -10,18 +13,18 @@ This is your first note. You'll find it in the [`notes/`](https://github.com/max
 
 To link to another note, you can use multiple syntaxes. The following four use the "double-bracket" notation ([view the Markdown source file](https://github.com/maximevaillancourt/digital-garden-jekyll-template/blob/master/_notes/your-first-note.md#link-syntax) to see the underlying syntax).
 
-- Using the note title: [[a note about cats]]
-- Using the note's filename: [[cats]]
-- Using the note's title, with a label: [[A note about cats|link to the note about cats using the note title]]
-- Using the note's filename, with a label: [[cats|link to the note about cats using the note's filename]]
+- Using the note title: [a note about cats](/notes/a note about cats)
+- Using the note's filename: [cats](/notes/cats)
+- Using the note's title, with a label: [A note about cats|link to the note about cats using the note title](/notes/A note about cats|link to the note about cats using the note title)
+- Using the note's filename, with a label: [cats|link to the note about cats using the note's filename](/notes/cats|link to the note about cats using the note's filename)
 
-You can organize notes in subdirectories and link them normally. For example, the links above all point to the `_notes/animals/cats.md` file. Here's another example: [[tigers]].
+You can organize notes in subdirectories and link them normally. For example, the links above all point to the `_notes/animals/cats.md` file. Here's another example: [tigers](/notes/tigers).
 
-Non-latin languages are supported: [[안녕하세요]]; so are accents/diacritics: [[bon appétit!]]
+Non-latin languages are supported: [안녕하세요](/notes/안녕하세요); so are accents/diacritics: [bon appétit!](/notes/bon appétit!)
 
-Dashes and underscores in file names are supported, and may be omitted in the bracket link syntax. As an example, the `your-first-note.md` file can be linked to with [[your first note]] or [[your-first-note]], or even [[yOuR-FiRsT Note]].
+Dashes and underscores in file names are supported, and may be omitted in the bracket link syntax. As an example, the `your-first-note.md` file can be linked to with [your first note](/notes/your first note) or [your-first-note](/notes/your-first-note), or even [yOuR-FiRsT Note](/notes/yOuR-FiRsT Note).
 
-In all cases, if the double-bracket link does not point to a valid note, the double brackets will still be shown, like this: [[there is no note that matches this link]].
+In all cases, if the double-bracket link does not point to a valid note, the double brackets will still be shown, like this: [there is no note that matches this link](/notes/there is no note that matches this link).
 
 Alternatively, you can use regular [Markdown syntax](https://www.markdownguide.org/getting-started/) for links, with a relative link to the other note, like this: [this is a Markdown link to the note about cats](/cats){: .internal-link}. Don't forget to use the `.internal-link` class to make sure the link is styled as an internal link (without the little arrow).
 
@@ -30,7 +33,7 @@ Since the Web is all about HTML, you can always use plain HTML if you want, like
 Of course, you can also link to external websites, like this: [this is a link to Wikipedia](https://wikipedia.org/). Again, you can use plain HTML if you prefer. Footnotes are also supported and will be treated like internal links.[^1] You can point to other notes in your footnotes.[^2]
 
 [^1]: This is a footnote. For more information about using footnotes, check out the [Markdown Guide](https://www.markdownguide.org/extended-syntax/#footnotes).
-[^2]: This is another footnote that links to the note about [[cats]]. You may also point to [[notes that do not exist]] if you wish.
+[^2]: This is another footnote that links to the note about [cats](/notes/cats). You may also point to [notes that do not exist](/notes/notes that do not exist) if you wish.
 
 ### Tweet embedding
 
@@ -66,7 +69,7 @@ Notice in the "Notes mentioning this note" section that there is another note li
 
 ### Link previews
 
-If you're on a device with mouse support, try hovering your mouse on internal links to preview the notes: [[a note about cats]].
+If you're on a device with mouse support, try hovering your mouse on internal links to preview the notes: [a note about cats](/notes/a note about cats).
 
 Links that have been previewed will be cached to avoid redundant requests.
 
