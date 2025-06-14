@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -22,7 +22,7 @@ jobs:
       run: pip install PyYAML
 
     - name: Run Obsidian to Jekyll conversion script
-      run: python _scripts/obsidian_to_jekyll.py
+      run: python scripts/obsidian_to_jekyll.py
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
